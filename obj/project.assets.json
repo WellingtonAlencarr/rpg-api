@@ -4676,11 +4676,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\WellGui\\DS\\RpgApi\\RpgApi.csproj",
+      "projectUniqueName": "D:\\WellGui\\RpgApi\\RpgApi.csproj",
       "projectName": "RpgApi",
-      "projectPath": "D:\\WellGui\\DS\\RpgApi\\RpgApi.csproj",
+      "projectPath": "D:\\WellGui\\RpgApi\\RpgApi.csproj",
       "packagesPath": "C:\\Users\\etechas\\.nuget\\packages\\",
-      "outputPath": "D:\\WellGui\\DS\\RpgApi\\obj\\",
+      "outputPath": "D:\\WellGui\\RpgApi\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

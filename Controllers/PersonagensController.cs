@@ -141,10 +141,58 @@ namespace RpgApi.Controllers
             }
         }
 
+        [HttpGet("GetByUser/{userId}")]
+        public async Task<IActionResult> GetByUserAsync(int userId)
+        {
+            try
+            {
+                List<Personagem> lista = await _context.TB_PERSONAGENS
+                .Where(u => u.Usuario.Id == userId)
+                .ToListAsync();
+                return Ok(lista);
+            }
+            catch (System.Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
 
+        [HttpGet("GetByPerfil/{userId}")]
+        public async Task<IActionResult> GetByPerfilAsync(int userId)
+        {
+            try
+            {
+                Usuario usuario = await _context.TB_USUARIOS
+                .FirstOrDefaultAsync(x => x.Id == userId);
+                List<Personagem> lista = new List<Personagem>();
+                if (usuario.Perfil == "Admin")
+                    lista = await _context.TB_PERSONAGENS.ToListAsync();
+                else
+                    lista = await _context.TB_PERSONAGENS
+                    .Where(p => p.Usuario.Id == userId).ToListAsync();
+                return Ok(lista);
+            }
+            catch (System.Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
 
-
-
+        [HttpGet("GetByNomeAproximado/{nomePersonagem}")]
+        public async Task<IActionResult> GetByNomeAproximado(string nomePersonagem)
+        {
+            try
+            {
+                List<Personagem> lista = await _context.TB_PERSONAGENS
+                .Where(p => p.Nome.ToLower().Contains(nomePersonagem.ToLower()))
+                .ToListAsync();
+                return Ok(lista);
+            }
+            catch (System.Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
 
     }   //Fim Controller
 }
