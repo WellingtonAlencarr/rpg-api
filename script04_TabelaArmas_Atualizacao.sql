@@ -110,7 +110,7 @@ ALTER TABLE [TB_ARMAS] ADD CONSTRAINT [FK_TB_ARMAS_TB_PERSONAGENS_PersonagemId] 
 GO
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
-VALUES (N'20240417010710_MigracaoUmParaUm', N'8.0.3');
+VALUES (N'20240417010710_MigracaoUmParaUm', N'8.0.6');
 GO
 
 COMMIT;

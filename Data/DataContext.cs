@@ -1,19 +1,13 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore; 
-/// HERANÇA DO BANCO DE DADOS
-using RpgApi.Models;  // Herança da API
+using RpgApi.Models;
 using RpgApi.Models.Enuns;
-using RpgApi.Utils;  // Herança da classe dos personagens
+using RpgApi.Utils;
 
 
 namespace RpgApi.Data
 {
     public class DataContext : DbContext // DBContext é a herança do BD
     {
-        ///Criar construtor CTOR + TAB 
         public DataContext(DbContextOptions<DataContext> options) : base(options)
         {
 

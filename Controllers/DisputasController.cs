@@ -1,9 +1,6 @@
 using System.Text;
-using System.Xml;
-using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Identity.Client;
 using RpgApi.Data;
 using RpgApi.Models;
 
@@ -221,13 +218,14 @@ namespace RpgApi.Controllers
                             $"{atacante.Nome.ToUpper()} é CAMPEÃO com {atacante.PontosVida} pontos de vida restantes!";
                         d.Narracao += resultadoFinal;
                         d.Resultados.Add(resultadoFinal);
-
                         break;
                     }
                 }
 
                 _context.TB_PERSONAGENS.UpdateRange(personagens);
                 await _context.SaveChangesAsync();
+
+                return Ok(d);
             }
             catch(System.Exception ex)
             {

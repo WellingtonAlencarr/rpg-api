@@ -1,8 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RpgApi.Data;
@@ -31,7 +26,7 @@ namespace RpgApi.Controllers
                 Personagem p = await _context.TB_PERSONAGENS
                     .Include(ar => ar.Arma) // Carrega a propriedade  Arma do objeto p
                     .Include(ph => ph.PersonagemHabilidades)
-                        .ThenInclude(h => h.Habilidade) //Carrega a lista de personagemHabilidade de  p
+                        .ThenInclude(h => h.Habilidade) //Carrega a lista de personagemHabilidade de p
                         .FirstOrDefaultAsync(pBusca => pBusca.Id == id);
 
                 return Ok(p);
@@ -48,26 +43,26 @@ namespace RpgApi.Controllers
         [HttpGet("GetAll")]
         public async Task<IActionResult> Get()
         {
-                 try
-         {
-                    List<Personagem> lista = await _context.TB_PERSONAGENS.ToListAsync();
-                    return Ok(lista);
-          }
-        catch (System.Exception ex)
-           {
-                    return BadRequest(ex.Message);
-                    
+            try
+            {
+                List<Personagem> lista = await _context.TB_PERSONAGENS.ToListAsync();
+                return Ok(lista);
+            }
+            catch (System.Exception ex)
+            {
+                return BadRequest(ex.Message);
+
             }
         }
-        [HttpPost]
 
+        [HttpPost]
         public async Task<IActionResult> Add(Personagem novoPersonagem)
         {
             try
             {
                 if (novoPersonagem.PontosVida > 100)
                 {
-                    throw new Exception ("Pontos de vida não pode ser maior que 100");
+                    throw new Exception("Pontos de vida não pode ser maior que 100");
                 }
                 await _context.TB_PERSONAGENS.AddAsync(novoPersonagem);
                 await _context.SaveChangesAsync();
@@ -81,14 +76,13 @@ namespace RpgApi.Controllers
         }
 
         [HttpPut]
-
         public async Task<IActionResult> Update(Personagem novoPersonagem)
         {
             try
             {
                 if (novoPersonagem.PontosVida > 100)
                 {
-                    throw new System.Exception ("Pontos de vida não pode ser maior que 100");
+                    throw new System.Exception("Pontos de vida não pode ser maior que 100");
                 }
                 _context.TB_PERSONAGENS.Update(novoPersonagem);
                 int linhasAfetadas = await _context.SaveChangesAsync();
@@ -100,25 +94,24 @@ namespace RpgApi.Controllers
                 return BadRequest(ex.Message);
             }
         }
-       [HttpDelete("id")]
 
-       public async Task<IActionResult> Delete(int id)
-       {
-        try
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
         {
-            Personagem pRemover = await _context.TB_PERSONAGENS.FirstOrDefaultAsync(p => p.Id == id);
+            try
+            {
+                Personagem pRemover = await _context.TB_PERSONAGENS.FirstOrDefaultAsync(p => p.Id == id);
 
-            _context.TB_PERSONAGENS.Remove(pRemover);
-            int linhasAfetadas = await _context.SaveChangesAsync();
-            return Ok(linhasAfetadas);
+                _context.TB_PERSONAGENS.Remove(pRemover);
+                int linhasAfetadas = await _context.SaveChangesAsync();
+                return Ok(linhasAfetadas);
+            }
 
+            catch (System.Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
-
-        catch (System.Exception ex)
-        {
-            return BadRequest(ex.Message);
-        }
-       }
 
 
         [HttpPost("DeletePersonagemHabilidade")]

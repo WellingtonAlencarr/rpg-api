@@ -54,7 +54,7 @@ CREATE INDEX [IX_TB_PERSONAGENS_HABILIDADES_HabilidadeId] ON [TB_PERSONAGENS_HAB
 GO
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
-VALUES (N'20240417012726_MigracaoMuitosParaMuitos', N'8.0.3');
+VALUES (N'20240417012726_MigracaoMuitosParaMuitos', N'8.0.6');
 GO
 
 COMMIT;
